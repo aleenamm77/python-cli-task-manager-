@@ -23,3 +23,15 @@ class TaskManager:
             print(f"{index}. {task}")
 
         print("===========================\n")
+
+    def delete_task(self, task_number):
+
+        if task_number < 1 or task_number > len(self.tasks):
+            print("Invalid task number.")
+            return
+
+        deleted_task = self.tasks.pop(task_number - 1)
+
+        save_tasks(self.tasks)
+
+        print(f'Task "{deleted_task}" deleted successfully!')

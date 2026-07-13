@@ -3,19 +3,42 @@ from task_manager import TaskManager
 
 
 def main():
+
     parser = argparse.ArgumentParser(
         description="Python CLI Task Manager"
     )
 
-    parser.add_argument(
-        "command",
-        help="Command to execute (add, list, delete)"
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True
     )
 
-    parser.add_argument(
+    # Add command
+    add_parser = subparsers.add_parser(
+        "add",
+        help="Add a new task"
+    )
+
+    add_parser.add_argument(
         "task",
-        nargs="?",
         help="Task description"
+    )
+
+    # List command
+    subparsers.add_parser(
+        "list",
+        help="Display all tasks"
+    )
+
+    delete_parser = subparsers.add_parser(
+        "delete",
+        help="Delete a task"
+    )
+
+    delete_parser.add_argument(
+        "task_number",
+        type=int,
+        help="Task number to delete"
     )
 
     args = parser.parse_args()
@@ -23,17 +46,15 @@ def main():
     task_manager = TaskManager()
 
     if args.command == "add":
-        if args.task:
-            task_manager.add_task(args.task)
-        else:
-            print("Please provide a task.")
+        task_manager.add_task(args.task)
 
     elif args.command == "list":
         task_manager.list_tasks()
+    elif args.command == "delete":
+        task_manager.delete_task(args.task_number)
 
-    else:
-        print(f"Unknown command: {args.command}")
-        print("Available commands: add, list, delete")
+    # Delete command
+   
 
 
 if __name__ == "__main__":
