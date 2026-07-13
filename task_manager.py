@@ -10,3 +10,16 @@ class TaskManager:
         self.tasks.append(task)
         save_tasks(self.tasks)
         print("Task added successfully!")
+    
+    def list_tasks(self):
+
+        if not self.tasks:
+            print("No tasks found.")
+            return
+
+        print("\n========== TASKS ==========")
+
+        for index, task in enumerate(self.tasks, start=1):
+            print(f"{index}. {task}")
+
+        print("===========================\n")

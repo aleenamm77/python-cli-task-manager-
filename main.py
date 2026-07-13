@@ -28,5 +28,13 @@ def main():
         else:
             print("Please provide a task.")
 
+    elif args.command == "list":
+        task_manager.list_tasks()
+
+    else:
+        print(f"Unknown command: {args.command}")
+        print("Available commands: add, list, delete")
+
+
 if __name__ == "__main__":
     main()
